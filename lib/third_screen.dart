@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_km_test/components/custom_elevated_button.dart';
 import 'package:flutter_km_test/model/user.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -16,11 +15,20 @@ class _ThirdScreenState extends State<ThirdScreen> {
   int currentPage = 1;
   int perPage = 10;
   bool isLoading = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
+    _scrollController.addListener(_scrollListener);
     fetchData();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
   }
 
   Future<void> fetchData() async {
@@ -51,10 +59,6 @@ class _ThirdScreenState extends State<ThirdScreen> {
     }
   }
 
-  void selectUser(String userName) {
-    Navigator.pop(context, userName);
-  }
-
   Future<void> refreshData() async {
     setState(() {
       users.clear();
@@ -68,6 +72,17 @@ class _ThirdScreenState extends State<ThirdScreen> {
       currentPage++;
     });
     await fetchData();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      loadNextPage();
+    }
+  }
+
+  void selectUser(String userName) {
+    Navigator.pop(context, userName);
   }
 
   @override
@@ -89,6 +104,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
       body: RefreshIndicator(
         onRefresh: refreshData,
         child: ListView.builder(
+          controller: _scrollController,
           itemCount: users.length + 1,
           itemBuilder: (BuildContext context, int index) {
             if (index == users.length) {
@@ -133,7 +149,7 @@ class _ThirdScreenState extends State<ThirdScreen> {
           ? const CircularProgressIndicator()
           : users.isEmpty
               ? const Text('No users found.')
-              : CustomElevatedButton(onPressed: loadNextPage, text: "Load More"),
+              : const SizedBox(),
     );
   }
 }

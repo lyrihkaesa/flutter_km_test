@@ -60,51 +60,53 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
         alignment: Alignment.center,
         padding: const EdgeInsets.fromLTRB(32, 142, 32, 32),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Image(image: AssetImage('assets/ic_photo.png'), width: 100, height: 100),
-            const SizedBox(height: 50),
-            TextField(
-              controller: nameController,
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                  borderSide: BorderSide(color: Color(0xFFE2E3E4), width: 1.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Image(image: AssetImage('assets/ic_photo.png'), width: 100, height: 100),
+              const SizedBox(height: 50),
+              TextField(
+                controller: nameController,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    borderSide: BorderSide(color: Color(0xFFE2E3E4), width: 1.0),
+                  ),
+                  hintStyle: TextStyle(color: Color(0xFF686777), fontSize: 16),
+                  hintText: 'Name',
                 ),
-                hintStyle: TextStyle(color: Color(0xFF686777), fontSize: 16),
-                hintText: 'Name',
               ),
-            ),
-            const SizedBox(height: 15),
-            TextField(
-              controller: sentenceController,
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
-                filled: true,
-                fillColor: Colors.white,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                  borderSide: BorderSide(color: Color(0xFFE2E3E4), width: 1.0),
+              const SizedBox(height: 15),
+              TextField(
+                controller: sentenceController,
+                decoration: const InputDecoration(
+                  contentPadding: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 20.0),
+                  filled: true,
+                  fillColor: Colors.white,
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                    borderSide: BorderSide(color: Color(0xFFE2E3E4), width: 1.0),
+                  ),
+                  hintStyle: TextStyle(color: Color(0xFF686777), fontSize: 16),
+                  hintText: 'Palindrome',
                 ),
-                hintStyle: TextStyle(color: Color(0xFF686777), fontSize: 16),
-                hintText: 'Palindrome',
               ),
-            ),
-            const SizedBox(height: 45),
-            CustomElevatedButton(
-              onPressed: () => checkPalindrome(sentenceController.text),
-              text: 'CHECK',
-            ),
-            const SizedBox(height: 15),
-            CustomElevatedButton(
-              onPressed: goToNextScreen,
-              text: 'NEXT',
-            )
-          ],
+              const SizedBox(height: 45),
+              CustomElevatedButton(
+                onPressed: () => checkPalindrome(sentenceController.text),
+                text: 'CHECK',
+              ),
+              const SizedBox(height: 15),
+              CustomElevatedButton(
+                onPressed: goToNextScreen,
+                text: 'NEXT',
+              )
+            ],
+          ),
         ),
       ),
     );
