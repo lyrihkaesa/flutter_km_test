@@ -59,11 +59,12 @@ class _FirstScreenState extends State<FirstScreen> {
           ),
         ),
         alignment: Alignment.center,
-        padding: const EdgeInsets.fromLTRB(32, 142, 32, 32),
+        padding: const EdgeInsets.fromLTRB(32, 15, 32, 15),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              const SizedBox(height: 127),
               const Image(image: AssetImage('assets/ic_photo.png'), width: 100, height: 100),
               const SizedBox(height: 50),
               TextField(
